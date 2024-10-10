@@ -1,13 +1,20 @@
 #include "Disassembler.hpp"
 #include "ErrorHandler.hpp"
-
 #include "Utilities.hpp"
 
-
-// Make sure to increment the line of the handler on every run
-
+#include <fstream>
 
 
+void Disassembler::reset()
+{
+	m_handler->reset();
+
+	m_size = 0;
+	m_capacity = 2;
+
+	delete[] m_instructions;
+	m_instructions = new std::string[m_capacity];
+}
 
 void Disassembler::ensureCapacity()
 {
@@ -43,7 +50,7 @@ void Disassembler::BaseDisassembler(const std::string& hex)
 	// Step 1: Checks if there are 8 hexadecimals (if not then the hex is invalid)
 	if (hex.size() != 8) {
 		m_handler->addError(hex);
-		return; // Stops the dissasembler
+		return; // Stops the disassembler
 	}
 
 	// Step 2: Converts each hex to binary (any invalid hex char will cause an error)
@@ -52,7 +59,7 @@ void Disassembler::BaseDisassembler(const std::string& hex)
 		std::string nibble = hexCharToBinary(hexChar);
 		if (nibble == "xxxx") {
 			m_handler->addError(hex);
-			return;
+			return; // Stops the disassembler
 		}
 		binaryString += nibble;
 	}
@@ -78,7 +85,7 @@ void Disassembler::RTypeDisassembler(const std::string& hex, const std::string& 
 	// Checks if the 6-bit code is in the map for mnemonics
 	if (R_TYPE_DICTIONARY.find(funct) == R_TYPE_DICTIONARY.end()) {
 		m_handler->addError(hex);
-		return;
+		return; // Stops the disassembler
 	}
 	instruction += R_TYPE_DICTIONARY.at(funct) + " ";
 
@@ -105,6 +112,34 @@ void Disassembler::RTypeDisassembler(const std::string& hex, const std::string& 
 void Disassembler::ITypeDisassembler(const std::string&, const std::string&)
 {
 
+}
+
+void Disassembler::Disassemble(const std::string& filename)
+{
+	reset();
+
+	// Step 1: Opens input file
+	std::ifstream inputFile(filename);
+	std::string hex; // The line should be 8 hexadecimals
+	if (!inputFile.is_open()) {
+		std::cerr << "Error: Could not open file \"" << filename << "\"" << std::endl;
+		return;
+	}
+
+	// Step 2: Iterates through file
+	while (std::getline(inputFile, hex)) {
+		BaseDisassembler(hex);
+		m_handler->nextLine();
+	}
+	inputFile.close(); // Making sure to close the file
+
+	// Step 3: Checks if file had errors, if the file did then the errors will be printed to the command line and dissasembler terminated
+	if (m_handler->getErrors() > 0) {
+		m_handler->printErrors();
+		return;
+	}
+	
+	// Step 4: Creates the output file for 
 }
 
 Disassembler::Disassembler()

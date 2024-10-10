@@ -20,6 +20,8 @@ public:
 	ErrorHandler();
 	~ErrorHandler();
 
+	void reset();
+
 	size_t getErrors() const noexcept;
 	void nextLine();
 	void addError(const std::string&);

@@ -40,6 +40,16 @@ ErrorHandler::~ErrorHandler()
 	delete[] m_data;
 }
 
+void ErrorHandler::reset()
+{
+	m_size = 0;
+	m_capacity = 2;
+	m_line = 1;
+
+	delete[] m_data;
+	m_data = new std::string[m_capacity];
+}
+
 std::size_t ErrorHandler::getErrors() const noexcept
 {
 	return m_size;
