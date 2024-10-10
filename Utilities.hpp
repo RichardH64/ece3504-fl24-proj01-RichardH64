@@ -42,6 +42,16 @@ const std::unordered_map<std::string, std::string> R_TYPE_DICTIONARY
 	{"100010", "sub"}, {"100011", "subu"}
 };
 
+const std::unordered_map<std::string, std::string> I_TYPE_DICTIONARY
+{
+	{"001000", "addi"}, {"001001", "addiu"}, {"001100", "andi"},
+	{"000100", "beq"}, {"000101", "bne"}, {"100100", "lbu"},
+	{"100101", "lhu"}, {"110000", "li"}, {"001111", "lui"},
+	{"100011", "lw"}, {"001101", "ori"}, {"001010", "slti"},
+	{"001011", "sltiu"}, {"101000", "sb"}, {"111000", "sc"},
+	{"101001", "sh"}, {"101011", "sw"}
+};
+
 
 // Converts char to binary (in string format)
 std::string hexCharToBinary(const char& hexChar) 

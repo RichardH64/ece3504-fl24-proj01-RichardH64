@@ -12,9 +12,9 @@ private:
 	void reset();
 	void ensureCapacity();
 
-	void BaseDisassembler(const std::string&);
 	void RTypeDisassembler(const std::string&, const std::string&);
 	void ITypeDisassembler(const std::string&, const std::string&);
+	void BaseDisassembler(const std::string&);
 public:
 	void Disassemble(const std::string&);
 
