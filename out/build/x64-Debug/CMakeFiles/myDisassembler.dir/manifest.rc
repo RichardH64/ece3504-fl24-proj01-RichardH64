@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "R:/VirginiaTech/ECE3504/ece3504-fl24-proj01-RichardH64/out/build/x64-Debug/CMakeFiles/myDisassembler.dir/embed.manifest"
