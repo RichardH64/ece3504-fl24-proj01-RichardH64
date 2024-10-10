@@ -1,5 +1,0 @@
-# ninja log v5
-7	490	7501945083023414	CMakeFiles/myDisassembler.dir/main.cpp.obj	e46731762b1544f4
-224	484	7501946202638669	myDisassembler.exe	d8d176df55009cce
-2	298	7501945081113417	CMakeFiles/myDisassembler.dir/Disassembler.cpp.obj	56440fe958ef7c02
-8	223	7501946202008667	CMakeFiles/myDisassembler.dir/ErrorHandler.cpp.obj	ae3dc12788ec8ad7
