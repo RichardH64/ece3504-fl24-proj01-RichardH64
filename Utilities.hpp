@@ -37,7 +37,7 @@ const std::unordered_map<std::string, std::string> REGISTER_DICTIONARY
 const std::unordered_map<std::string, std::string> R_TYPE_DICTIONARY
 {
 	{"100000", "add"}, {"100001", "addu"}, {"100100", "and"},
-	{"100111", "nor"}, {"100101", "or"}, {"101010", "slt"},
+	{"100111", "nor"}, {"100101", "or "}, {"101010", "slt"},
 	{"101011", "sltu"}, {"000000", "sll"}, {"000010", "srl"},
 	{"100010", "sub"}, {"100011", "subu"}
 };
@@ -46,10 +46,10 @@ const std::unordered_map<std::string, std::string> I_TYPE_DICTIONARY
 {
 	{"001000", "addi"}, {"001001", "addiu"}, {"001100", "andi"},
 	{"000100", "beq"}, {"000101", "bne"}, {"100100", "lbu"},
-	{"100101", "lhu"}, {"110000", "li"}, {"001111", "lui"},
-	{"100011", "lw"}, {"001101", "ori"}, {"001010", "slti"},
-	{"001011", "sltiu"}, {"101000", "sb"}, {"111000", "sc"},
-	{"101001", "sh"}, {"101011", "sw"}
+	{"100101", "lhu"}, {"110000", "li "}, {"001111", "lui"},
+	{"100011", "lw "}, {"001101", "ori"}, {"001010", "slti"},
+	{"001011", "sltiu"}, {"101000", "sb "}, {"111000", "sc "},
+	{"101001", "sh "}, {"101011", "sw "}
 };
 
 
