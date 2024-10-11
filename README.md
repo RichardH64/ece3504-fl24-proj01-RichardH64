@@ -6,6 +6,11 @@
 Each instruction is turned into it's MIPS equivalent. Once all the instructions are decoded, the program the creates a *.s file with
 assembly instructions.</p>
 
+<h2>Specifications</h2>
+
+-  Decode core instructions excluding: j, jal, jr
+-  Uses registers $t0 to $t9 and $s0 to $s7 for temporary and saved respectively
+
 <h2>Running Program on Windows</h2>
 
 The program is a command line app, so the program requires the files to be place in command.
