@@ -14,3 +14,10 @@ The program is a command line app, so the program requires the files to be place
 cd \path\to\program
 myDisassembler.exe <filename>.obj
 ```
+
+<h3>Multiple files</h3>
+
+```
+cd \path\to\program
+myDisassembler.exe <filename1>.obj <filename2>.obj <filename3>.obj 
+```
