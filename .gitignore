@@ -1,0 +1,22 @@
+# Ignore all .log files
+*.log
+
+# Ignore build directories
+/build/
+/dist/
+/out/
+
+# Ignore temporary files and folders
+*.tmp
+*.bak
+*.swp
+
+# Ignore system-specific files
+.DS_Store   # macOS
+Thumbs.db   # Windows
+
+# Ignore visual studio files
+/.vs/
+/build-*/
+
+

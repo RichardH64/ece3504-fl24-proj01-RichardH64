@@ -1,0 +1,16 @@
+.globl	main
+.data
+.text
+	
+main:
+	lw  $t0, 0($s0)
+	lw  $t1, 12($s0)
+	sw  $t0, 12($s0)
+	sw  $t1, 0($s0)
+	lw  $t0, 4($s0)
+	lw  $t1, 8($s0)
+	sw  $t0, 8($s0)
+	sw  $t1, 4($s0)
+
+	ori $v0, $0, 10
+	syscall
