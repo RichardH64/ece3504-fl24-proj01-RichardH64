@@ -114,4 +114,17 @@ ptrdiff_t binaryToInt(const std::string& binary)
 	return dec;
 }
 
+std::string intToHexString(int value)
+{
+	const char* hexDigits = "0123456789ABCDEF";
+	std::string hexString = "0000";  // Prepare a fixed 4-character string
+
+	// Iterate over the nibbles (4 bits) and convert each one
+	for (int i = 3; i >= 0; --i) {
+		hexString[3 - i] = hexDigits[(value >> (i * 4)) & 0xF];
+	}
+
+	return hexString;
+}
+
 #endif // !UTILITIES_HPP

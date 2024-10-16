@@ -123,6 +123,7 @@ void Disassembler::ITypeDisassembler(const std::string& hex, const std::string& 
 	// Step 3: Dissect binary values
 	std::string rs = binary.substr(START_RS, LENGTH_RS), rt = binary.substr(START_RT, LENGTH_RT);
 	std::string opcode = binary.substr(START_OPCODE, LENGTH_OPCODE), immediate = binary.substr(START_IMMEDIATE, LENGTH_IMMEDIATE);
+	int currentLine = m_size;
 
 	// Step 4: Add the mnemonic, because it's I-Type, based off OPCODE 6 bits
 	// Checks if the 6-bit code is in the map for mnemonics
@@ -150,11 +151,36 @@ void Disassembler::ITypeDisassembler(const std::string& hex, const std::string& 
 		instruction += std::to_string(binaryToUInt(immediate));
 		break;
 	case 4:		// beq
-	case 5:		// bne
-		instruction += REGISTER_DICTIONARY.at(rs) + ", ";
-		instruction += REGISTER_DICTIONARY.at(rt) + ", ";
-		instruction += "Addr_" + hex.substr(4, 4);
-		saveLabel(hex);
+	case 5:		// bne 
+		{
+			// Starts Instruction
+			instruction += REGISTER_DICTIONARY.at(rs) + ", ";
+			instruction += REGISTER_DICTIONARY.at(rt) + ", ";
+
+			// Finds the target Address
+			int offset = binaryToInt(immediate);
+			int targetAddr = (currentLine * 4) + (offset * 4);
+			std::string targetAddrHex = intToHexString(targetAddr);
+
+			// Creates the label
+			std::string label = "Addr_" + targetAddrHex + ":\n";
+
+			// Adds the target address to the instruction
+			instruction += label;
+
+			// Adds label to the map
+			//std::string addrInBinary = "";
+			//for (size_t i = 0; i < hex.size(); i++) {
+			//	addrInBinary += hexCharToBinary(hex.at(i));
+			//}
+
+			std::string addrInBinary = "";
+			for (size_t i = 0; i < targetAddrHex.size(); i++) {
+				addrInBinary += hexCharToBinary(targetAddrHex.at(i));
+			}
+
+			m_labels.insert({ binaryToUInt(addrInBinary) / 4, label });
+		}
 		break;
 	case 36:		// lbu
 	case 37:		// lhu
@@ -244,6 +270,10 @@ void Disassembler::Disassemble(const std::string& filename)
 
 	// Step 4: Adds labels to the assembly file
 	for (auto label : m_labels) {
+		if (label.first == 0) {
+			m_instructions[0] = label.second;
+			continue;
+		}
 		insert(label.first, label.second);
 	}
 
