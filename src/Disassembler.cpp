@@ -55,11 +55,6 @@ void Disassembler::saveLabel(const std::string& hex)
 		addrInBinary += hexCharToBinary(hex.at(i));
 	}
 
-	// Address is not divisible by 4 meaning it's not correct
-	if (binaryToUInt(addrInBinary) % 4 != 0) {
-		m_handler->addError(hex);
-	}
-
 	m_labels.insert({ binaryToUInt(addrInBinary) / 4, label });
 }
 
@@ -173,10 +168,6 @@ void Disassembler::ITypeDisassembler(const std::string& hex, const std::string& 
 	case 56:		// sc
 	case 41:		// sh
 	case 43:		// sw
-		// Address is not divisible by 4 meaning it's not correct for loading/storing
-		if (binaryToUInt(immediate) % 4 != 0) {
-			m_handler->addError(hex);
-		}
 		instruction += REGISTER_DICTIONARY.at(rt) + ", ";
 		instruction += std::to_string(binaryToInt(immediate)) + "(" + REGISTER_DICTIONARY.at(rs) + ")";
 		break;
